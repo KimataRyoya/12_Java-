@@ -1,46 +1,51 @@
 package org.example;
 
-public class Book {
+class Book {
+
+  private int id;
   private String title;
   private String author;
-  private int number;
   private boolean isBorrowed;
+  private String borrowedBy;
 
-  public Book(String title,String author,int number){
+  public Book(int id, String title, String author) {
+    this.id = id;
     this.title = title;
     this.author = author;
-    this.number = number;
     this.isBorrowed = false;
-  }
-  public String getTitle(){
-    return title;
-  }
-  public String getAuthor(){
-    return author;
-  }
-  public int getNumber(){
-    return number;
-  }
-  public boolean isBorrowed(){
-    return isBorrowed;
-  }
-  public void borrowBook(){
-    if (!isBorrowed){
-      isBorrowed = true;
-    }else{
-      System.out.println("この本はすでに借りられています: " + title);
-    }
-  }
-  public void returnBook(){
-    if (isBorrowed){
-      isBorrowed = false;
-    }else{
-      System.out.println("この本はすでに返却されています: " + title);
-    }
-  }
-  @Override
-  public String toString(){
-    return "タイトル:" + title + ", 著者:" + author + "　貸出状況:" + (isBorrowed?"貸出中" : "貸出可能") + "　番号:" + number;
+    this.borrowedBy = null;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getAuthor() {
+    return author;
+  }
+
+  public boolean isBorrowed() {
+    return isBorrowed;
+
+  }
+
+  public void borrowBook(String user) {
+    this.isBorrowed = true;
+    this.borrowedBy = user;
+  }
+
+  public void returnBook() {
+    this.isBorrowed = false;
+    this.borrowedBy = null;
+  }
+
+  @Override
+  public String toString() {
+    return "番号: " + id + ", タイトル: " + title + ", 著者: " + author + ", 貸出状況: " + (
+        isBorrowed ? "貸出中 (借りた人: " + borrowedBy + ")" : "利用可能");
+  }
 }
